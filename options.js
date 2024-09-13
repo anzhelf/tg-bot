@@ -1,3 +1,17 @@
+export const formOptions = {
+	reply_markup: JSON.stringify({
+		keyboard: [[{ text: 'Заполнить форму' }]],
+	}),
+}
+
+export const webOptions = {
+	reply_markup: JSON.stringify({
+		inline_keyboard: [
+			[{ text: 'Открыть приложение', web_app: { url: '/https://ya.ru' } }],
+		],
+	}),
+}
+
 export const gameOptions = {
 	reply_markup: JSON.stringify({
 		inline_keyboard: [

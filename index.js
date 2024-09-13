@@ -1,7 +1,8 @@
 import TelegramApi from 'node-telegram-bot-api'
-import { gameOptions, againOptions } from './options.js'
+import { againOptions, gameOptions } from './options.js'
 
 const token = `7368920589:AAFWALVR4ZK62BMhG0Puy8CgQdD4SoZOOVo`
+const webAppUrl = 'https://main--tgwebappreact.netlify.app/'
 const bot = new TelegramApi(token, { polling: true })
 
 const chats = {}
@@ -27,9 +28,39 @@ const start = () => {
 		const text = msg.text
 		const chatId = msg.chat.id
 
-		console.log(text)
 		if (text === '/start') {
-			return bot.sendMessage(chatId, 'Добро пожаловать!')
+			await bot.sendMessage(chatId, 'Добро пожаловать!')
+
+			await bot.sendMessage(chatId, 'Заполни форму', {
+				reply_markup: {
+					inline_keyboard: [
+						[
+							{
+								text: 'Заполнить форму',
+								web_app: { url: webAppUrl + '/form' },
+							},
+						],
+					],
+				},
+			})
+
+			return bot.sendMessage(
+				chatId,
+				'Заходи в наш интернет магазин по кнопке ниже',
+				{
+					reply_markup: {
+						inline_keyboard: [
+							[
+								{
+									text: 'Сделать заказ',
+									web_app: { url: webAppUrl },
+								},
+							],
+						],
+					},
+				},
+			)
+			// return bot.sendMessage(chatId, 'Заполни форму', webOptions)
 		}
 
 		if (text === '/info') {
